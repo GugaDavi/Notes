@@ -886,8 +886,8 @@ Regex: // TODO Regex
     de busca:
 
         g - Global: Para pesquisar em todo texto;
-        m - ?
         i - Ignore Case: Procurar o caracter, independente da formatação: maiusculo, menusculo.
+        m - Multline: Para pesquisas iniciadas com "^" e possuem quebra de linhas.
 
     Exemplo:
 
@@ -918,7 +918,7 @@ Regex: // TODO Regex
         No segundo a procura é de letras minusculas de "'a' a 'z'";
         E na ultima notação a procura é por números de "0 a 9", letras minusculas "'a' a 'z'" e maiusculas de "'A' a 'Z'";
 
-    Outras funcionalidades do "Regex" são: // TODO Funcionalidades Regex
+    Outras propriedades do "Regex" são: // TODO Propriedades Regex
 
         \w - Para obtenção de caracteres alfabeticos, númericos e o "_" (underline);
         \d - Para obtenção de somente números(digits);
@@ -1026,6 +1026,24 @@ Regex: // TODO Regex
 
                         1 - O match será feito para obrigatoriamente 2 números;
                         2 - Caso ele encontre 3 ou 4 números, será dado match também. Em suma opcional;
+                    
+                Outra funcionalidade do "?" é quando ele é usado ao lado de um repetido. Fazendo a chamada "Captura não gulosa"
+                Exemplo:
+
+                    var text = '<h1>Título da página</h1><p>Este é um parágrafo</p><footer>Rodapé</footer>';
+
+                    console.log( text.match( /(<\w+>)(.+)(<\/\w+>)/)  );
+
+                    Nesse caso haveŕa 1 match e 3 capturas, contudo se quisermos que cada flag seja um match, precisamos
+                    utlizar o "?":
+
+                    console.log( text.match( /(<\w+>)(.+?)(<\/\w+>)/g ) );
+
+                    Desta forma o match será feito com a quantidade minima possivel de caracteres:
+
+                        1 - O regex irá fazer uma busca que inicie com uma flag;
+                        2 - Qualquer coisa que estiver dentro dessa flag;
+                        3 - E assim que ele achar um fechamento de flag ele termina o primeiro match;
 
             "+": // TODO "+" no Regex
 
@@ -1041,6 +1059,72 @@ Regex: // TODO Regex
                     console.log( /\d\d+/g );
 
                     O match será feito em 2 números ou mais, mas no minimo 2;
+            
+            "^": // TODO "^" no Regex
+
+                O "^" pode ser usado dentro de uma lista para negar aquilo que está dentro, mas também pode ser usada fora,
+                so que com outra funcionalidade. Com o "^" fora de uma lista ele tem a função de verificar se o caracter
+                seguinte a ele está no inicio da sentença ou não.
+                Exemplo:
+
+                    consol.log( /^A/ );
+
+                    Nesse caso especifico ele irá verificar se a sentença começa com a letra "A", caso não o match não ocorre.
+
+            "$": // TODO "$" no Regex
+
+                O "$" é o oposto do "^" onde consultamos se o elemento anterior ao "$" está no final da string.
+                Exemplo:
+
+                    console.log( /a$/ );
+
+                    O regex irá verificar se o ultimo caracter da string é uma "a", caso não o match não acontece.
+
+            "(?:)": // TODDO "(?:)" no Regex
+
+                O "(?:)" tem a funcionalidade de não capturar aquele grupo em que ela foi inserida.
+                Exemplo:
+
+                    console.log( /([aeiou])/g );
+
+                    Nesse caso terá um match para existencia de qualquer um dos elementos dentro da lista, e uma captura.
+                    Caso eu não queira capturar as vogais fazemos:
+
+                    console.log( /(?:[aeiou])/g );
+
+                    Com essa notação dizemos para o regex somente tentar o match e não capturar as vogais.
+
+            \1, \2...: // TODO "\1, \2..." no Regex
+
+                A notação \1, \2 pode ser usada para referenciar capturas dentro do Regex.
+                Exemplo:
+
+                    console.log( /<(h1)>(.+)(\/\w+)/ );
+
+                    Basicamente:
+
+                        1 - O Regex irá buscas por tags iniciando com <h1>;
+                        2 - Tenha qualquer coisa dentro dela;
+                        3 - E termine com uma "\" + alguma coisa;
+
+                    Contudo dessa forma ele pode casar com fechamento de qualquer tag, dai podemos referencia-lo.
+
+                    console.log( /<(h1)>(.+)(\/\1)/ );
+
+                    Dessa maneira:
+
+                        1 - O Regex irá fazer mesma coisa que o anterior;
+                        2 - Só que no fechamento da tag ele irá buscar o fechamento com a tag igual a captura declarada;
+            .search(): // TODO .search() no Regex
+
+                O .search() faz a busca de um elemento, igual ao indexOf(), só que com notação de regex.
+
+                var name = 'Gustavo';
+
+                console.log( name.search( /G/ ) );
+
+                    Nesse caso o retorno será da posição que está o elemento, "0". Caso não fosse encontrado seria "-1"
+                    IMPORTANTE, ele só procura até a primeira aparição, mesmo colocando o /g de global;
 
     Usando o .replace no regex: // TODO .replace Regex
 
@@ -1116,6 +1200,43 @@ Regex: // TODO Regex
                 3 - Dai fazemos a mesma logica do anterior, só que alterando um a um.
 
             E o retorno será: 'GuStAvO';
+    
+    Funcionalidades do Regex: // TODO Funcionalidades do Regex
+
+        Com o Regex é um tipo de dado, há algumas funcionalidade que podemos utlizar:
+
+        .test():
+
+            É algum bem parecido com o .search(), só que ele diz se há ou não algo na string;
+            Exemplo:
+
+                var name = 'Gustavo';
+
+                console.log( /\d/.test(name) );
+
+                Nesse caso, nos passamos um "parametro" (números) e verificamos se a variavel possui algum.
+                O retorno será "false" justamente porque não possui aquelo que a expressão procura.
+
+        .exec():
+
+            Ele retorna elementos baseado no parametro do regex e faz uma nova busca cada vez que é chamado.
+            Exemplo:
+
+                var name = 'Gus123tavo';
+
+                console.log( /\d/g.exec(name) );
+                console.log( /\d/g.exec(name) );
+                console.log( /\d/g.exec(name) );
+                console.log( /\d/g.exec(name) );
+
+                    1 - O .exec irá procurar conforme o parametro, neste caso números;
+                    2 - Dentro da string "name";
+                    3 - Na primeira execução o resultado será "1";
+                    4 - Na segunda já será "2", pois ele retorna os valores por chamada, não todos de uma vez;
+                    5 - Na terceira "3";
+                    6 - E caso ocorra a quarta chamada o resultado será "null"; reiniciando a busca;
+                    7 - Chamando a quinta vez o resultado volta a ser "1";
+
 
 */
 // TODO FIM
