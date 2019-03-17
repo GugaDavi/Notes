@@ -617,6 +617,16 @@ Operadores condicionais: // TODO Operadores condicionais
     Sem pre temos que utilizar o break no final das ações dos casos, pois se não switch não será parado.
     No caso do default não colocamos pois ele é a ultima ação.
 
+    O (if/else) tem uma forma mais simplicifaca de declaração, sem as chaves "{}":
+
+        if ( isso )
+            console.log( "ok" );
+
+        Basicamente:
+
+        1 - O if irá validar o "isso", sendo true ele dará o console.log( ok ).
+        2 - Essa notação só funciona para soluções em uma unica linha, para mais usar o metodo normal.        
+
 Condicional ternario: // TODO Condicional ternario
 
     É uma forma simplificada de fazer o "if" da seguinte forma <condicao> ? true : false;
@@ -1237,6 +1247,56 @@ Regex: // TODO Regex
                     6 - E caso ocorra a quarta chamada o resultado será "null"; reiniciando a busca;
                     7 - Chamando a quinta vez o resultado volta a ser "1";
 
+Window: // TODO Window
+
+    O "Window" é o objeto global com os elementos do browser.
+
+    Propriedades:
+
+        .alert( Mensagem ) = Retorna com um popup travando a navegação enquanto a caixa da mensagem não for fechada;
+        .prompt( Pergunta ) = Irá fazer uma pergunta em um popup e solicitar uma resposta;
+        .confirm( Pergunta ) = Irá fazer uma pergunta que terá como resposta: "SIM" ou "NÃO"
+
+    Propriedades do "document":
+
+        .getElementyById( "id" ) = Seleciona o elemento de acordo com o id declarado no HTML;
+        .getElementsByClassName( "class" ) = Seleciona os elementos de acordo com a classe aplicado no arquivo HTML;
+        .getElementsByTagName( "tag" ) = Seleciona as tags passadas por parametro;
+        .getElementsByName( "name" ) = Seleciona os elementos que tiverem o valor name === ao passado no parametro;
+        
+    Manuseando os elementos do DOM, natualmente iremos utilizarmos e em alguns casos altera-los.
+    Inclusive uma boa pratica é sempre que formos criar uma variavel vinda do DOM, devemos utilizar "$" antes do nome
+    Para ficar claro que o valor daquela variavel originou no DOM.
+    Como podemos selecionar elementos com as propriedades acima e atribui-las a variavel temos um problema, pois
+    Quando atribuimos o valor de um id, class, tag ou name não estamos criando uma variavel mutavel e sim um referencial
+    onde qualquer alteração feita na variavel será passada para o objeto global.
+
+    Devido a isso temos a ferramenta:
+
+        .querrySelector( 'elemento' ) = Irá pegar o primeiro elemento que encontrar do tipo solicitado;
+        .querrySelectorAll( 'elemento' ) = Irá pegar todos os elementos que batem com o parametro passado.
+
+    Algo interessante falar do .querrySelector:
+
+        Selecionar:
+
+        ID = "#nome_do_id";
+        Class = ".nome_da_class";
+        Atibuto = "[atributo="nome_do_atributo"]";
+        Tag = "nome_da_tag";
+
+    Funcionalidades:
+
+        .value = Acessa o valor do elemento que ele está referenciando;
+        .addEventLister( evento, callback function, outra coisa ) = É um metodo que fica "ouvindo" o browser até que o "evento"
+            aconteça, quando ocorre a "callback function" é executada;
+        .preventDefault() = Metodo para quando usado o "submit" (envio de formulario) as informações não sejam apresentadas
+            no browser;
+
+
+    Eventos Mouse:
+
+        'click' = Quando ocorre um clique em uma aerea determinada;
 
 */
 // TODO FIM
