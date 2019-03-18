@@ -1292,6 +1292,10 @@ Window: // TODO Window
             aconteça, quando ocorre a "callback function" é executada;
         .preventDefault() = Metodo para quando usado o "submit" (envio de formulario) as informações não sejam apresentadas
             no browser;
+        .setTimeOut( function() {}, x * 1000 ) = Executa uma função depois de "x" segundos;
+        .setInterval( function() {}, x * 1000 ) = Executa a função a cada "x" segundos;
+        .clearTimeOut( TimeOut ) = Interrompe a execução do "setTimeOut";
+        .clearInterval ( Interval ) = Interrompe a execução do "setInterval";
 
 
     Eventos Mouse:
