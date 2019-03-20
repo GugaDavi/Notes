@@ -416,6 +416,15 @@ Funções() {} // TODO Funções () {}
 
         O console irá retornar o valor de nome.
 
+    Propriedades da função:
+
+        .name = Retorna o nome dado a função;
+        .length = Retorna a quantidade de parametros que aquela função pode ter como retonro;
+        .toString = Retorna todo corpo da função em formato de string;
+        .call( this, parametros da função ) = Retorna a função que ela está referenciando quando vazia, ou retorna a função usando com parametro um objeto; 
+        .apply( this, [parametros em array] ) = Retorna a função com o referencial do this e utlizando elementos de um array para passar como parametros para a função;
+        .prototype = Uma propriedade que será usada para estender as propriedades de uma função ou construtor já criado;
+
     Uma das coisas mais importantes na manutenção dos codigos é a nomeção correta na declaração de variavies ou funções
 
         Exemplo:
@@ -431,6 +440,7 @@ Funções() {} // TODO Funções () {}
     Quando não nomeamos uma função geramos uma função anonima, onde declaramos em uma variavel e por fim executamos.
     Contudo há casos onde não iremos nomear a função ou declara-la em uma função, e neste momento transformamos a função
     de literal para uma expressão.
+    
 
         Função literal:
         function sum() {
