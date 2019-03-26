@@ -1,0 +1,177 @@
+/*
+
+O CSS é o estilo do texto HTML. Podemos inserir o estilo no codigo:
+
+    Diretamente nas tags:
+
+        body {
+            propriedade: valor;
+        }
+
+        #ID {
+            propriedade: valor;
+        }
+        .class {
+            prorpriedade: valor;
+        }
+
+    Propriedades mais usadas:
+
+        background: fundo;
+            background: linear-gradient(diretação, cor1, cor2); // Usado para aplicar um degradé em uma direção
+            de uma cor(cor1) para outra(cor2).
+            Esse recurso pode não ter o funcionamento completo em alguns navegadores antigos, por isso há algumas formas de evitar:
+            background-color: blue; // Para quando o navegador não suporta essa função;
+            background: linear-gradient(white, blue); // Efeito padrão, caso o navegador suporte;
+            background: -moz-linear-gradient(white, blue); // Para versões antigas do Mozila;
+            background: -o-linear-gradient(white, blue); // Versões antigas do Opera;
+            background: -webkit-linear-gradient(white, blue); // Versões antigas do Safari;
+            A "direção" você insere em graus, positivos ou negativos:
+                background: linear-gradient(90deg, whtite, blue); // O efeito se dará da esquerda para direita;
+        width: largura;
+        height: altura;
+        color: cor do texto;
+        float: left ou right; // Coloca um conteúdo em block para flutuar a esqueda ou direita;
+        border: 1px (espessura) solid (tipo) red (cor);
+            Tipos de bordas:
+                solid = Solida;
+                dotted = Pontilhada;
+                dashed = Tracejada;
+                border-radius: 10px; // Cuvartura da vertice da borda;
+                border-top-left-radius: 10px // Para quando que somente uma ponta fique arredondada;
+                font-size: tamanho da letra;
+                font-family: estilo da fonte 1, estilo 2, estilo 3; // O navegador irá carregar a primeira fonte disponivel;
+                font-weight: para controlar o nivel do "negrito";
+                text-align: left, right ou center. // Para alinhamento do texto;
+                text-transform: para alteração na formatação do texto:
+                uppercase: Para todas letras maiusculas;
+                lowercase: Para todas letras minusculas;
+        text-decoration: altera detalhes no texto:
+            underline: coloca o texto sublinhando; 
+        line-height: 20px; // Determina o tamanho da aerea escrita, serve principalmente para alinhar o texto no meio;
+        margin: manipulação de espaçamentos externos;
+        padding: manipulação de espaçamentos internos;
+        position: dá independencia a um bloco;
+            absolute: o bloco fica livre para se moviementar;
+            fixed: o bloco fica fixado em um local determinado;
+            top: 10px; // Distancia que o bloco irá ficar do topo;
+            left: 10px; // Distancia que o bloco irá ficar da margem esquerda;
+            right: 10px; // Distancia que o bloco irá ficar da margem direita;
+            bottom: 10px; // Distancia que o bloco irá ficar na margem inferior;
+        display: forma como o bloco aparece na pagina;
+            none: não aparece para o usuario;
+            inline: tira as caracteristica de block e dá um aspecto de <span>
+            inline-block: continua com a caracteristica de block, mas em linha;
+        cursor: // Modifica o mouse;
+            poiter: Transforma na mãozinha;
+        box-shadow: 10px 10px 5px red; // Usado para criar uma sombra em objetos;
+            // 1o valor é a sombra na horizontal, valores positivos - direita, negativos - esquerda;
+            // 2o sombra na vertical, valores positivos - baixo, negativos - para cima;
+            // 3o é o quanto a sombra ficará definida ou não, quanto mais baixo o valor mais proximo do formato original irá ficar
+                e quanto mais alto mais "esfumaçado" ficará;
+            // 4o cor da sombra;
+        text-shadow: 10px 10px 5px red; // Mesmas propriedades que a "box-shadow" só que em texto;
+        transition: all 1s linear; // Usado quando aquele elemento irá sofrer alguma modificação futura;
+            all = Irá aplicar em qualquer tipo de mudança;
+            1s = Tempo que essa transição irá usar;
+            linear = Forma que será feita, na mesma velocidade do inicio ao fim;
+        word-wrap: break-word; // Usada para quebrar palavras que estão saindo das limitações de suas caixas;
+        outline: 0; // Para tirar o brilho ao redor do input quando focamos nele;
+
+    Tipos de marcadores lista não ordenada:
+
+    ul {
+        list-style-type:"disc"; // Padrão, disco preenchido;
+        list-style-type:"squere"; // Quadrado;
+        list-style-type:"none"; // Sem marcação;
+        list-style-type:"circle"; // Circulo não preenchido;
+    }
+
+    ol {
+        type: "1" // Padrão, Ordenada com números;
+        type: "A" // Ordenadas com letras maiusculas;
+        type: "a" // Ordenadas com letras minusculas;
+        type: "I" // Algarismos Romanos maiusculos;
+        type: "i" // Algarismos Romanos minusculo;
+    }
+
+    Formatando links:
+
+    a {
+        text-decoration: none; // Para tirar o sublinhado
+        color: black; // modifica a cor padrão de azul para preto
+    }
+
+    a:hover {
+        text.decoration: underline; // Quando passado o mouse em cima do link, irá sublinha-lo
+    }
+
+    Basico para Disigner responsivo:
+
+    Quando queremos que o CSS de algo altere de acordo uma condição que queremos podemos fazer da seguinte forma:
+    Exemplo:
+
+        .container {
+            backgroud-color: red;
+            width: 300px;
+            height: 300px;
+        }
+
+        Temos o acima o estilo aplicado. Caso deseje alterar a cor de fundo de acordo com o tamanho da largura do "container";
+
+        @media only screen and (max-width: 299px) {
+            .container {
+                backgroud-color: blue;
+                width: 150px;
+            }
+        }
+
+        Nesse caso quando largura da tela chegar a "299px" a cor de fundo irá mudar para "azul" e diminui seu tamanho;
+
+        Essa (condição) pode ser agrupada, tipo (condição1) and (condição2).
+        Propriedades:
+
+            max-width: Largura maxima;
+            min-width: Largura minima;
+            landscape: Quando o celular está na horizontal;
+
+        Uma dica para site responsivo é usar porcentagem na largura:
+
+            width: 100%
+        
+        Contudo dessa forma se um monitor for de uma resolução muito grande não ficará de uma forma interessante
+        Dai pode dar um limite para essa largura:
+
+            width: 100%;
+            max-width: 1920px;
+
+        Nesse caso até "1920px" o site irá abrir.
+    
+    Animation no CSS:
+
+        No CSS3 conseguimos fazer uma animação passando somente condicionais. Exemplo:
+
+        @keyframes danceBox {
+            0% { background-color: red; top: 0px; left: 0px; }
+            25% { background-color: yellow; top: 0px; left: 200px; }
+            50% { background-color: blue; top: 200px; left: 200px; }
+            75% { background-color: green; top: 200; left: 0; }
+            100% { background-color: red; top: 0; left: 0; }
+        }
+
+        Nosso joguinho acima irá seguir cada passo de acordo com o passar do tempo,
+        utilizamos porcentagem para ele ser adaptada independente do tempo passado;
+
+        .caixa {
+            background-color: red;
+            width: 150px;
+            height: 150px;
+            posicion: absolunte;
+            animation-name: danceBox; // Inserimos a animação;
+            animation-duration: 4s; // Duração da animação em segundos;
+            animation-delay: 2s; // Usado quando queremos que o inicio não seja imediato;
+            animation-interation-count: 4; // Quantas vezes a animação irá acontecer;
+                Para repetições infinitas utilizar: infinete;
+
+
+*/
