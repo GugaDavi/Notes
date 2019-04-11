@@ -1306,6 +1306,7 @@ Window: // TODO Window
         .setInterval( function() {}, x * 1000 ) = Executa a função a cada "x" segundos;
         .clearTimeOut( TimeOut ) = Interrompe a execução do "setTimeOut";
         .clearInterval ( Interval ) = Interrompe a execução do "setInterval";
+        window.localiton.href = "index.html" = Redereciona a pagina para o arquivo informado;
 
 
     Eventos Mouse:
@@ -1314,4 +1315,3 @@ Window: // TODO Window
 
 */
 // TODO FIM
-
