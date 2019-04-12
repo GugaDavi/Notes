@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 # Notes
-=======
-# Notes.js
 
-Algumas anotações feitas durante o curso de JS ninja do Fernando Daciuk.
+Alguns arquivos de anotações das aulas até então.
 
 For all.
->>>>>>> origin/master
