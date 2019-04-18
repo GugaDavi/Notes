@@ -1,0 +1,181 @@
+<!--
+    O HTML é o esqueleto de todo site, onde toda parte escrita organizada é colocada.
+
+    O HTML é dividido em algumas partes:
+
+    <html>
+        <head>
+            Cabeçaho: Aqui é onde inserimos algumas informações que não aparecem para o usuario, como:
+            <title>Titulo da Pagina</title>
+            <link/> Importação de arquivo CSS externo
+            <style> Aplicação de CSS local </style>
+            <script Importação de arquivo JS externo> Aplicação de JS local </script>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"> // Usada para adaptar nosso site p/ mobile;
+            Uma prorpiedade usada para quando desejamos formatar aqueles links para compartilhamento nas redes sociais:
+                <meta propety="og:url" content="http://www.nossosite.com.br" /> // Dizemos qual é a nossa URL;
+                <meta propety="og:type" content="website" /> // Especificado o tipo do site;
+                <meta propety="og:title" content="Titulo da Pagina" /> // Titulo da Pagina;
+                <meta propety="og:description" content="Descrição da pagina" /> // Descrição da Pagina;
+                <meta propety="og:image" content="http://www.linkdaimgem.com.br" /> // Link com URL da imagem;
+            <base href="http://www.meusite.com.br" /> Usado para declarar qual o site original
+        </head>
+        <body>
+            Corpo da aplicação
+            <p>
+                Paragrafo
+            </p>
+            <br/> Pula de Linha
+            <pre>
+                O navegador interpreta o texto dentro dessa tag exatamente como foi escrito
+            </pre>
+            <strong>
+                Caracteres em Negrito
+            </strong>
+            <i>
+                Caracteres em Italico
+            </i>
+            <u>
+                Caracteres com underscor
+            </u>
+            <small>
+                Caracter com fonte levemente diminuida
+            </small>
+            <strike>
+                Caracter cortado no meio
+            </strike>
+            <sub>
+                Caracter levemente abaixo da linha do texto
+            </sub>
+            <sup>
+                Caracter levemente acima da llinha do texto
+            </sup>
+            <ul>
+                Lista não ordenada
+                <li>Elementos da Lista</li>
+            </ul>
+            <ol>
+                Lista Ordenada
+                <li>Itens da Lista</li>
+            </ol>
+            <img src="localização da img" /> Adiciona uma imagem ao corpo do HTML
+                Dentro de img podemos inserir algumas tag interessantes, como:
+                    width: Larguda da imagem;
+                    height: Altura da imagem;
+                    alt: Um text que antecede a imagem carregada;
+                    title: Quando passamos o mouse na imagagem aparece esse pequeno texto;
+            <a href="local do documento ou url de um site" >Link de uma Pagina</a>
+                Outra tag que podemos utilizar dentro do <a> é o:
+                    download: Quando inserimos essa tag o navegador baixa o arquivo do href;
+                    target="_blank" = Quando queremos que o link seja aberto em outra aba;
+            <table> - Tabela
+                <tr> - Linha
+                    <td>
+                        Coluna
+                        Tags:
+                            colspan="x" = Mescla a coluna em "x" vezes;
+                            align="right, center" = Alinhamento do texto, por padrão vem a esquerda;
+                    </td>
+                </tr>
+            </table>
+            <form>
+                Formulario
+                tags:
+                    method="POST" é um metodo de envio dos dados de forma interna;
+                    method="GET" forma de envio via url;
+                    action="login.php" Para onde será enviado os dados;
+            </form>
+            <input\> Entrada de dados do usuario
+                Tags:
+                    type="text" = Preenchimento do campo com qualquer caracter;
+                    type="password" = Preenchimento com caracteres mascarados;
+                    type="search" = Usado para pesquisas;
+                    type="email" = Usado para preenchimento de e-mail (com validação);
+                    type="url" = Usado para preenchimento de url (com validação);
+                    type="tel" = Usado para preechimento de telefone, quando acessado pelo celular o teclado ficará somente númerico;
+                    type="number" = Inserir valores com opção extra de controle para adicionar ou diminuir o valor digitado;
+                    type="range" min="1" max="100"= Cria um slider que pode selecionar um valor entre o "min" e o "max";
+                    type="date" = Abre um caledario para você inserir uma data/mês/ano;
+                    type="week" = Abre um caledario para você selecionar uma semana número da semana/ano;
+                    type="month" = Abre um caledario para você inserir um mês/ano;
+                    type="time" = Opção de determinar uma determinada hora e minuto;
+                    type="datetime-local" = Um capo com data/mês/ano e hora/minutos;
+                    type="color" = Selecionar uma cor;
+                    type="radio" = Escolha de apenas uma opção;
+                    type="checkbox" = Escolha de varias opções;
+                    name="usuario" = Qual será o nome desse valor quando ele for enviado;
+                    type="submit" = Envio dos dados;
+                    value="Enviar" = Quando queremos passar um valor previo para o elemento;
+                    required = Usado para mencionar que aquele capo é obrigatorio preenchimento;
+                    placehoder="Usuário" = Usado para auxiliar na identificação do assunto de um input;
+                    autofocus = Quando a pagina é carregada o cursor já estará no local indicado;
+                    maxlength="4" = Limita a quantidade de caracteres que serão digitados, neste caso "4";
+                    autocomplete="on" = Ativa ou desativa o autocomplete para ajudar no preenchimento dos campos;
+                    size="30" = Largura da caixa;
+            <textaerea> Aerea para digitação de texto 
+                Tags:
+                    cols="30" = Largura da caixa
+                    rows="30" = Altura da caixa
+            </textarea>
+            <select> Aerea para opção de algum item 
+                <option>Opção 1</option>
+                <option>Opção 2</option>
+                <option>Opção 3</option>
+            </select>
+            <iframe frameborder="0" src="pagina.html" > Carrega outra pagina de internet </iframe>
+            // Tags de eventos:
+                onclick="JS" - Quando aquela tag ou flag for clicada executara o script JS dentro das "";
+                onmouseover="JS" - Quando passa o mouse em cima da flag ou tag;
+                onmouseout="JS" - Quando o mouse passar sobre a tag ou flag e sai;
+            <div>
+                Usado para organizar o codigo HTML e selara-los em blocos;
+            </div>
+            <span>
+                Usado geralmente para textos, onde não a divisão em blocos, mantendo a fluides;
+            </span>
+            <header>
+                Conteudo inicial do meu site, quando os mecanismos de pesquisa passarem por ele, terão
+                um resumo da informação que a pagina está trazendo;
+            </header>
+            <nav>
+                Tag dedicada a navegação em menus, quando criamos um é aconselhado cria-los dentro dessa tag
+            </nav>
+            <footer>
+                Usado para rodapé do site;
+            </footer>
+            <section>
+                Separador de assuntos de uma pagina;
+            </section>
+            <article>
+                Conteúdo principal do site;
+            </article>
+            <aside>
+                Conteúdo secundario;
+            </aside>
+            <time>
+                Auxilia o buscador quando no conteúdo do site utilizamo alguma referencia a data ou tempo
+                Podemos colocar uma flag nesse trecho.
+                Exemplo:
+                    O dia mais feliz da minha vida é o <time datetime="1993-08-29">dia do meu aniversario.</time>
+                Nesse caso acima o buscador sabe que o "dia do meu aniversario" é dia 29/08/1993;
+            </time>
+            <video> - Diz para o navegador que naquele espaço será reproduzido um video;
+                <source src="local_do/video.mp4" type="video/mp4" /> // Essa tag funciona com 3 formatos: MP4, OGG e WMV;
+                Propriedades:
+                    "controls" para o navegador criar os controles de: "play", "barra de progreço", "volume" e "tela cheia";
+                    "autoplay" Quando a pagina é carregada o video inicia automaticamente;
+            </video>
+            <audio> - Usado para reprodução de audio no navegador;
+                <source src="loca_do/som.mp3" type="audio/mpeg" />
+                Propriedades:
+                    "controls" para o navegador criar os controles de: "play", "barra de progreço", "volume" e "tela cheia";
+                    "autoplay" Quando a pagina é carregada o video inicia automaticamente;
+                    "loop" Reproduz a música repetidamente;
+                    "muted" Inicia com volume zerado;
+                    "preload" Faz uma load antecipado do audio, para caso o usuario dê "play" já esteja pré carregado;
+            </audio>
+            // Flags:
+                data-nome="Gustavo" // A flag data pode receber qualquer "-nome" pois ela serve para nomeção de elemento para uso posterior; 
+        </body>
+    </html>
+
+-->

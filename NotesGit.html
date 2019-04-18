@@ -1,0 +1,63 @@
+GIT
+
+O GIT é um sistema de versionamento de codigo. Utilizado principalmente para organização
+trabalho em equipe e segurança para possiveis erros.
+
+O da ferramente gira em torno de:
+
+    1 - Reverter arquivos que foram salvos com erros;
+    2 - Trabalho em equipe, todos mexendo no mesmo documento;
+    3 - Trabalhar em varias versões do mesmo projeto;
+
+Ele é um mecanismo que é espelhado em algumas plataformas, que tem as mesmas funcionalidades
+diferenciando somente na experiencia do usuario.
+
+A ferramente que esse doc será focado é no GitHub.
+
+O uso do git consite em alguns comando, como:
+
+    git clone = Para clonar um repositorio;
+    git status = Retorna as alterações feitas naquele projeto, mas não enviadas;
+    git diff = Retorna exatamente quais alterações foram feitas e onde foram no arquivo;
+    git add = Para confirmar as alterações feitas;
+    git commit -m "" = A mensagem que irá dizer o que foi alterado no arquivo;
+    git log = Retorna todas as mensgens dos commits
+    git branch = Retorna a lista das branchs criadas naquele projeto;
+    git branch -b = Cria uma nova branch;
+    git checkout = Entra na branch mencionada;
+    git branch -D = Deleta uma branch local
+        O checkout pode ser utilizado também para retornar um arquivo que foi modificado
+        Quando queremos voltar somente um arquivo, não todas as alterações feita até aquele momento;
+        git checkout HEAD -- nome_do_arquivo // Dessa forma somente esse arquivo volta ao que era;
+    git fetch = Diz quais as atualizações do repositorio na nuvem;
+    git merge = Baixa as atualizações da nuvem para o repositorio local;
+    git pull = Baixa atualizações e historico da nuvem para o repositorio local;
+    git push = Envia as alterações para o repositorio e branch.
+    git pusch :nomeDaBranch = Deleta a Branch na nuvem;
+    git reset --x = Reseta o projeto para o ponto "x";
+        "x" Pode ser:
+        soft = Reseta o projeto para antes do envio das alterações;
+        mixed = Reseta o projeto para antes de confirmar as alterações;
+        hard = Desconsidera todas as alterações depois daquele ponto;
+    git revert = Usado para desfazer uma alteração feita por outro commit sem perder aquilo oque foi feito;
+        Quando fazemos alterações e algo da errado e queremos voltar para um ponto anterior, mas não
+        perder aquilo que foi feito utilizamos essa funcionalidade;
+    
+Em algumas situações não queremos mandar para a nuvem todos os arquivos que estão na pasta.
+Dai temos o .gitignore Ele é utilizado para listar os arquivos que serão ignorados.
+
+Criamos um arquivo nomeado como: .gitignore
+E dentro dele precisamos somente inserir os nomes dos arquivos que queremos ignorar;
+Caso deseje ignorar arquivos com um tipo de extenção especifica fazemos:
+
+    *.txt // Nesse caso todos os arquivos que tiverem .txt serão ignorados
+
+Outro ponto interessante é os Forks e Pull Requests, são usados basicamente para trabalharmos
+com projetos de terceiros.
+
+Quando alguem tem um projeto posso fazer uma copia para meu repositorio, com o Fork.
+Depois de feito, posso trabalhar normalmente.
+
+Quando fazemos as alterações não conseguimos mandar no projeto original justamente porque ele não
+nos pertence, daí utilizamos o Pull Request para enviar o que foi mudado para o proprietario original.
+E caberá a ele aceitar ou não.
