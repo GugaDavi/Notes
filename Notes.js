@@ -421,7 +421,7 @@ Funções() {} // TODO Funções () {}
         .name = Retorna o nome dado a função;
         .length = Retorna a quantidade de parametros que aquela função pode ter como retonro;
         .toString = Retorna todo corpo da função em formato de string;
-        .call( this, parametros da função ) = Retorna a função que ela está referenciando quando vazia, ou retorna a função usando com parametro um objeto; 
+        .call( this, parametros da função ) = Retorna a função que ela está referenciando quando vazia, ou retorna a função usando com parametro um objeto;
         .apply( this, [parametros em array] ) = Retorna a função com o referencial do this e utlizando elementos de um array para passar como parametros para a função;
         .prototype = Uma propriedade que será usada para estender as propriedades de uma função ou construtor já criado;
 
@@ -440,7 +440,7 @@ Funções() {} // TODO Funções () {}
     Quando não nomeamos uma função geramos uma função anonima, onde declaramos em uma variavel e por fim executamos.
     Contudo há casos onde não iremos nomear a função ou declara-la em uma função, e neste momento transformamos a função
     de literal para uma expressão.
-    
+
 
         Função literal:
         function sum() {
@@ -635,7 +635,7 @@ Operadores condicionais: // TODO Operadores condicionais
         Basicamente:
 
         1 - O if irá validar o "isso", sendo true ele dará o console.log( ok ).
-        2 - Essa notação só funciona para soluções em uma unica linha, para mais usar o metodo normal.        
+        2 - Essa notação só funciona para soluções em uma unica linha, para mais usar o metodo normal.
 
 Condicional ternario: // TODO Condicional ternario
 
@@ -995,7 +995,7 @@ Regex: // TODO Regex
 
                 console.log( /\d{x,y}/g );
 
-                    1 - Onde "x" é a quantidade minima que o "\d" terá que aparecer e o 
+                    1 - Onde "x" é a quantidade minima que o "\d" terá que aparecer e o
                     2 - "y" a quantidade maxima para dar match;
 
             Também pode ser expressa a quantidade exata que deseja:
@@ -1003,7 +1003,7 @@ Regex: // TODO Regex
                 console.log( /\d{x}/g );
 
                     1 - Nesse caso o a pesquisa de "\d" será com sequencia de "x" vezes;
-            
+
             Não é obrigatorio o uso do "y", caso ele não seja declarado, o parametro só terá minimo como exigencia.
 
                 console.log( /\d{x,}/g );
@@ -1027,8 +1027,8 @@ Regex: // TODO Regex
                 Neste caso:
 
                     1 - Os números serão selecionados caso apareçam no minimo uma vez e no maximo 4;
-    
-            "?": // TODO "?" no Regex 
+
+            "?": // TODO "?" no Regex
 
                 A interrogação "?" tem uma função de deixar o elemento que ela se refere opcional.
                 Exemplo:
@@ -1037,7 +1037,7 @@ Regex: // TODO Regex
 
                     Neste caso a busca será por um elemento númerico, mas caso o elemento seguinte seja númerico também
                     dará match.
-                    
+
                     var text = 'Nascimento: 29/08/1993';
 
                     console.log( text.match( /\d\d\d?\d?/g ) );
@@ -1046,7 +1046,7 @@ Regex: // TODO Regex
 
                         1 - O match será feito para obrigatoriamente 2 números;
                         2 - Caso ele encontre 3 ou 4 números, será dado match também. Em suma opcional;
-                    
+
                 Outra funcionalidade do "?" é quando ele é usado ao lado de um repetido. Fazendo a chamada "Captura não gulosa"
                 Exemplo:
 
@@ -1079,7 +1079,7 @@ Regex: // TODO Regex
                     console.log( /\d\d+/g );
 
                     O match será feito em 2 números ou mais, mas no minimo 2;
-            
+
             "^": // TODO "^" no Regex
 
                 O "^" pode ser usado dentro de uma lista para negar aquilo que está dentro, mas também pode ser usada fora,
@@ -1220,7 +1220,7 @@ Regex: // TODO Regex
                 3 - Dai fazemos a mesma logica do anterior, só que alterando um a um.
 
             E o retorno será: 'GuStAvO';
-    
+
     Funcionalidades do Regex: // TODO Funcionalidades do Regex
 
         Com o Regex é um tipo de dado, há algumas funcionalidade que podemos utlizar:
@@ -1273,7 +1273,7 @@ Window: // TODO Window
         .getElementsByClassName( "class" ) = Seleciona os elementos de acordo com a classe aplicado no arquivo HTML;
         .getElementsByTagName( "tag" ) = Seleciona as tags passadas por parametro;
         .getElementsByName( "name" ) = Seleciona os elementos que tiverem o valor name === ao passado no parametro;
-        
+
     Manuseando os elementos do DOM, natualmente iremos utilizarmos e em alguns casos altera-los.
     Inclusive uma boa pratica é sempre que formos criar uma variavel vinda do DOM, devemos utilizar "$" antes do nome
     Para ficar claro que o valor daquela variavel originou no DOM.
@@ -1295,11 +1295,95 @@ Window: // TODO Window
         Atibuto = "[atributo="nome_do_atributo"]";
         Tag = "nome_da_tag";
 
+    Arvore do DOM:
+
+        Os objetos do DOM funcionam como uma arvore genealogica, onde cada elemente possui pais, irmãos e filhos.
+
+        Propriedades:
+
+          .parentNode = Retorna o pai imediato do elemento;
+          Importante! - Espaços e quebra de linha também são considerado filhos nas pripriedades abaixo:
+            .childNodes = Retorna todos os filhos do elemento;
+            .firstChild = Retorna o primeiro filho do elemento;
+            .lastChild = Retorna o ultimo filho do elemento;
+            .nextSibling = Retorna o irmão seguinte ao elemento;
+            .previousSibling = Retorna o irmão anterior ao elemento;
+          Importante! - Propriedades abaixo consideram filhos somente tags HTML:
+            .children = Retorna os filhos de uma aplicação que são tags HTML;
+            .firstElementChild = Retorna a primeira tag filho;
+            .nextElementSibling = Retorna a primeira tag irmão do elemento;
+            .previousElementSibling = Retorna a tag irmão anterior ao elemento;
+            .childElementCount = Retorna a quantidade de tags dentro de um nó;
+
+          .nodeType = Retorna o tipo do elemento em formato de númeração:
+
+            document = 9;
+            element = 1;
+            text = 3;
+            documentFragment = 11;
+
+          .nodeValue = Retorna o valor de um elemento;
+          .nodeName = Retorna o nome do elemento;
+
+        Metodos:
+
+          .hasAttribute('name') = Retorna se existe aquele atributo na tag;
+          .hasAttributes() = Retorna se há algum atributo na tag;
+          .appendChild(child) = Inseri um elemento filho no final da tag;
+          .insertBefore(insertTag, flagTag) = Insere um elemento "inserTag", antes do elemento "flagTag";
+          .cloneNode(Boolean) = Clona uma tag. Quando True, todo ele. Quando False, somente a tag sem o conteudo;
+          .hasChildNodes() = Retorna se há algum filho dentro da tag, HTML ou não;
+          .removeChild(filho) = Remove o filho informado;
+          .replaceChild(new, old) = Substitui um elemento por outro;
+
+          document.createTextNode('text') = Cria um elemento texto;
+          document.createElement('tagName') = Cria uma tag;
+
+          document.createDocumentFragment() = É utilizado para otimizar o trabalhado do DOM, pois
+            quando manipulamos elementos a cada nova alteração no DOM o browser irá recarregar a pagina e
+            reconstrui item por item para inserir o que foi alterado, para a pagina não quebrar.
+            Contudo com esse metodo nós juntamos todas as alterações em um unico local para quando o
+            browser for inserir as alteração faça somente uma vez, não uma para cada elemento.
+            Exemplo:
+
+              var $fragment = document.createDocumentFragment();
+
+              var childP = document.createElemente('p');
+              var textP = document.createTextNode('Esse é o texto de P!');
+
+              childP.appendChild(textP);
+              fragment.appendChild(childP);
+
+              document.body.appendChild(fragment);
+
+              Basicamente:
+
+                1 - Criamos um bloco de alteração com o $fragment;
+                2 - Montamos as alterações;
+                3 - Inserimos elas dentro do bloco;
+                4 - Fazemos uma unica inserção no corpo da nossa pagina;
+
+        Atributos:
+
+          Atributos que retornam e recebem informação (GETTER, SETTER):
+            .id = Retorna o id do elemento.
+            .className = Retorna as Classes do elemento;
+            .value = Retorna o valor do elemento;
+            .href = Retorna o link para onde aquela tag está direcionando;
+            .title = Retorna o titulo da tag, se não existe retorna "";
+            .src = Retorna o local de origem da imgagem;
+            .getAttribute('atrib') = Retorna o nome do atributo. Sempre como string;
+            .setAttribute('atrib', 'value') = Altera valores de atributos ou cria atributos inseridos os valores passados;
+
     Funcionalidades:
 
         .value = Acessa o valor do elemento que ele está referenciando;
         .addEventLister( evento, callback function, outra coisa ) = É um metodo que fica "ouvindo" o browser até que o "evento"
             aconteça, quando ocorre a "callback function" é executada;
+            outroca coisa pode ser True ou False. Em eventos de blocos, quando False os eventos são desparados do objeto clicado
+            até o objeto pai, quando True, os eventos vão do pai para o objeto clicado.
+        .removeEventLister = Tem a mesma funcionalidade do add só que para remover eventos, contudo precisa dos mesmo
+            parametros para funcionar, 'evento', function de callback e true ou false.
         .preventDefault() = Metodo para quando usado o "submit" (envio de formulario) as informações não sejam apresentadas
             no browser;
         .setTimeOut( function() {}, x * 1000 ) = Executa uma função depois de "x" segundos;
@@ -1309,9 +1393,24 @@ Window: // TODO Window
         window.localiton.href = "index.html" = Redereciona a pagina para o arquivo informado;
 
 
-    Eventos Mouse:
+    Eventos:
 
         'click' = Quando ocorre um clique em uma aerea determinada;
+        'input' = Valida cada caracter inserido no input;
+        'keyup' = Valida cada tecla que é apertada e solta, só valida quando a tecla é solta;
+        'keydonw' = Valida as teclas que são apertadas;
+        'change' = Sempre que há uma alteração de valor;
+
+    Eventos do document:
+
+        'DOMContentLoaded' = Dispara um aviso para o JS quando os elementos que quero manipular estão carregados na pagina;
+            Metodo geralmente utilizado quando o script é carregando antes do texto.
+
+    Eventos do Window:
+
+        'load' = Evento usado para executar algo somente quando toda a pagina já está carregada;
+
+AJAX: // AJAX
 
 */
 // TODO FIM
