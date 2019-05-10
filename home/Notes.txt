@@ -1,0 +1,449 @@
+ES6:
+
+  O ES6 é uma das ultimas atualizações do JavaScript. Atualmente, além dela, existem a ES7 e ES8 que ainda estão em
+  processo de consolidação.
+  Contudo, como há navegadores e dispositivos mobile que ainda não suportam esses tipos de atualizações, foi criado
+  uma ferramenta para migrar aquilo que foi feito nas versões ES6+ para os navegadores mais antigos.
+
+  Depois de fazer a instalação do Node e Yarn, instalamos as seguintes estenções da Babel:
+
+    @babel/cli
+    @babel/core
+    @babel/preset-env
+
+  Com essas extensões instaladas criamos o arquivo .babelrc e dentro dele inserimos:
+
+  {
+    "presets": ["@babel/preset-env"]
+  }
+
+  Basicamente já estamos com nosso ambiente configurado para trabalhar com essas tecnologias mais novas sem se preocupar
+  no possivel erro que nossos codigos iriam gerar em sistemas/navegadores mais antigos.
+
+  No packege.json, que é gerado na raiz do nosso projeto, inserimos a informação de que queremos transformar aquele
+  codigo JS para uma forma que seja lida por todos os navegadores.
+
+  Nesse arquivos inserimos:
+
+    "scripts": {
+      "dev": "babel ./main.js -o ./bundle.js -w"
+    }
+
+    Basicamente dizemos:
+
+      1 - O comando "dev" irá referenciar a transformação do arquivo main.js;
+      2 - Para o arquivo bundle.js;
+      3 - Com o "-w" solicitamos que ocorra um monitoramento do arquivo para novas atualizações;
+      4 - E a cada nova mudança no arquivo o babel irá compilar automaticamente;
+
+  Com essas informações inseridas precisamos somente executar o Yarn no terminal, com:
+
+    yarn dev
+
+    Compilando o arquivo em ES6+ para ES5 ou menos;
+
+  Novidades do ES6:
+
+    Classes:
+
+      Uma das novidades inseridas para o ES6 é a possibilidade de criação de classes, onde dela passamos propriedades e
+      metodos que serão passados quando forem invocados.
+
+        class NewToDo {
+          constructor() {
+            this.todo = [];
+          }
+
+          addTodo() {
+            this.todo.push('Novo ToDo Inserido');
+            console.log( this.todo );
+          }
+        }
+
+        Basicamente nessa classe:
+
+        1 - Criamos o "constructor()", onde irá criar uma variavel "todo", que será um array;
+        2 - Inserimos o metodo "addTodo()" que irá inserir uma mensagem no array;
+        3 - Depois de inserido, será mostrado no console o array "todo";
+
+        Executando:
+
+        var buttonInsertToDo = document.querySelector('[data-js="button"]');
+
+        const insertTodo = new NewToDo();
+
+        buttonInsertToDo.addEventListener( 'click', function() {
+          insertTodo.addTodo();
+        } );
+
+        Basicamente:
+
+        1 - Selecionamos o elemento HTML;
+        2 - Passamos as propriedades da nossa classe para uma variavel;
+        3 - Inserimos um evento;
+        4 - Executamos o metodo que nossa nova varivel agora possui;
+
+      Há possibilidade de fazermos extensões de classes já criadas:
+
+        class List extends NewToDo {
+          constructor() {
+            super();
+          }
+        }
+
+        Basicamente dizemos que a classe "List" terá todas as propriedades de NewToDo. Outra informação interessante é
+        o metodo super() dentro do constructor(), onde irá "puxar" todas as propriedades que existem no constructor
+        origianal;
+
+      Classes estaticas:
+
+        Geralmente utilizadas quando o uso daquela classe é pratico e rapido.
+
+        class Matematica {
+          static soma(a, b) {
+            return a + b;
+          }
+        }
+
+        Matematica.soma(1, 2);
+
+        Basicamente:
+
+          1 - Criamos uma classe que terá somente a função de somar;
+          2 - Com o static no inicio de um metodo, o JS identifica somente aquele metodo, deixando de lado qualquer outra informação;
+          3 - Com o static em uma classe podemos chama-la diratamente, sem a necessidade de instancia-la com o "new";
+
+    Variaveis:
+
+      Atualmente há duas novas formas de declarações de variaveis:
+
+      const -> Utilizado para quando precisamos atribuir um valor a uma variavel somente uma vez;
+
+        Exemplo: const a = 1;
+
+        Caso tentemos: a = 2; Irá dar um erro justamente porque não podemos atribui-lo outro valor;
+
+        Contudo caso o valor seja, por exemplo:
+
+        const a = { nome: 'Gustavo' };
+
+        Nesse caso podemos fazer: a.nome = 'Fernando';
+
+        Podemos mudar o valor da propriedade dentro da variavel, mas não a variavel propriamente dita;
+
+      let -> Utilizada para variaveis que serão utilizadas dentro de um escopo especifico;
+
+        Exemplo:
+
+        function soma(x) {
+          let y = 2;
+
+          return x + y;
+        }
+
+        console.log( soma(5) );
+
+        Nesse caso especifico o resultado será 7, mas caso desejamos consultar a variavel "y" não conseguimos, pois ela
+        está dentro da função;
+
+    Arrow Function:
+
+      É uma forma de escrever funções, principalmente de callback, com uma syntax menos verbosa.
+
+      Exemplo:
+
+        const array = [1, 2, 3, 4, 5];
+
+        const newArray = array.map( function (item) {
+          return item * 2;
+        } )
+
+        Basicamente será criado um novo array com os valores de "array" multiplicados por 2;
+
+        Podemos reescrever o mesmo codigo:
+
+          const newArray = array.map((item) => {
+            return item * 2;
+          })
+
+          Nesse caso tiramos a palavra "function" e inserimos "=>" entre os parenteses e as chaves;
+
+          const newArray = array.map( item => {
+            return item * 2;
+          } )
+
+          Quando a função tem somente 1 parametro, podemos tirar os parenteses;
+
+          const newArray = array.map( item => item * 2 );
+
+          Quando o retorno da função for um valor simples e não tiver muitas linhas de comando na função podemos
+          dizer o que será retornado(sem o uso do retorn) logo em seguida da "=>";
+
+    Desestruturação:
+
+      Com o ES6 o JS passou a poder desestruturar a pesquisa de propriedades de um objeto;
+
+      Exemplo:
+
+        const usuario = {
+          nome: 'Gustavo';
+          idade: 25;
+          endereco: {
+            rua: 'São Francisco';
+            numero: 1491;
+          }
+        }
+
+        Caso desejamos salvar em variaveis diferentes os diferentes valores, precisamos:
+
+        const nome = usuario.nome;
+        const idade = usuario.idade;
+        const rua = usuario.endereco.rua;
+
+        Outra forma de fazer a mesma coisa é:
+
+        const { nome, idade } = usuario;
+
+        Desse modo o JS irá criar duas varivaeis com o nome das propriedades do objeto que foi passado: "usuario";
+
+        Caso tenhamos um objeto dentro de um objeto, fazemos:
+
+        const { endereco: { rua } } = usuarios;
+
+        Dessa forma iremos obter o valor de endereco.rua e armazena-lá em uma variavel com nome "rua";
+
+        Essa simplificação pode ser feita em uma função:
+
+        function mostrarNome(obj) {
+          return obj.nome;
+        }
+
+        console.log( mostrarNome(usuario) );
+
+        Nessa função mostraremos o valor da propriedade "nome" dentro do objeto passo como parametro.
+
+        Outra forma de escrever a mesma coisa é:
+
+        function mostrarNome( { nome } ) {
+          return nome;
+        }
+
+        Basicamente como sabemos que passaremos um objeto como parametro para a função, já antecipamos ao JS
+        que ele deve procurar pela propriedade "nome", dentro do objeto que foi passado por parametro;
+
+    REST:
+
+      O rest serve para quando queremos pegar alguma informação que pode ou não existir ou não sabemos a quantidade exata;
+
+      Exemplo:
+
+      const usuario = {
+        nome: 'Gustavo';
+        idade: 25;
+        endereco: {
+          rua: 'São Francisco';
+          numero: 1491;
+        }
+      }
+
+      const { nome, ...dados } = usuarios;
+
+      Nesse caso será criado duas variais, a "nome" que terá a string "Gustavo" e um objeto com a propriedade idade e
+      endereço;
+
+      Podemos utilizar em arrays também:
+
+        const array = [1, 2, 3, 4, 5];
+
+        const [ a, b, ...c ] = array;
+
+        Nesse caso temos três variaveis: "a" == 1; "b" == 2 e c == [3, 4, 5];
+
+      Em funções:
+
+        function soma(...params) {
+          return params.reduce( (total, item) => total + item );
+        }
+
+        Nesse caso temos uma função que irá somar todos os valores que forem passados por parametro, sem limites.
+        Utilizamos o reduce, justamente porque os parametros são segmentados no formato de array(), dai conseguimos
+        usar o metodo reduce;
+
+    SPREAD:
+
+      Ao contrario do REST, o SPREAD pega todas as informação daquele objeto que ele foi passado como referencia.
+
+      const arr1 = [1, 2, 3];
+      const arr2 = [4, 5, 6];
+
+      const arra3 = [ ...arr1, ...arr2 ];
+
+      Dessa forma copiamos todos os item do arr1 e arr2;
+
+      Funciona também com objeto:
+
+      const usuario1 = {
+        nome: 'Gustavo',
+        idade: 25,
+        cidade: 'Maceió',
+      }
+
+      Caso queira copiar os memos dados do "usuario1" para outro usuario, mudando somente o nome, por exemplo.
+
+      const usuario2 = { ...usuario1, nome: 'Jose' };
+
+      Nesse caso, será copiado todas as propriedades do objeto, mas com o nome diferente, alterando para "Jose";
+
+    Templete Literals:
+
+      Usado para substituir a contatenação classica do JS.
+
+      const nome = 'Gustavo';
+      const idade = 25;
+
+      console.log( 'Meu nome é' + nome + ' e tenho ' + idade + ' anos.' );
+
+      Outra forma de escrever a mesma linha de codigo é:
+
+      console.log( `Meu nome é ${nome} e tenho ${idade} anos.` );
+
+    Object Short Syntax:
+
+      É uma forma mais pratica de atribuir valores a objetos:
+
+      const nome = 'Gustavo';
+      const idade = 25;
+
+      const usuario = {
+        nome = nome,
+        idade = idade,
+      }
+
+      Esse seria a forma usual, mas com o ES6 podemos fazer:
+
+      const usuario = {
+        nome,
+        idade,
+      }
+
+      Porque dessa forma ele irá atribuir a propriedade o nome e o valor da variavel que está sendo atribuida;
+
+    WebPack:
+
+      O serviço de webpack serve para podermos fazer a integração entre varios arquivos, não somente JS.
+
+      Antes de fazermos a instalação alteramos o local onde as dependencias estão sendo instaladas,
+      justamente para que fique claro que essas dependencias estão sendo alocadas somente para
+      nos auxiliar no desenvolvimento e não será necessario no ambiente de produção.
+
+      Na parte de dependencies, inserimos: devDependencies.
+
+      Dai sempre que fizermos uma instalação para uso na area de desenvolvimento inserimos um "-D".
+
+      Para tal fazemos a instalação:
+
+        yarn add webpack webpack-cli -D
+
+      Depois da instalação criamos um arquivo de configuração do webpack:
+
+        webpack.config.js
+
+        Nele inserimos as seguintes informações:
+
+        module.exports = {
+          entry: './main.js', // Arquivo principal
+          output: {
+            path: __dirname,
+            filename: 'bundle.js', // Arquivo final
+          },
+          module: {
+            rules: [
+              {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                  loader: 'babel-loader',
+                }
+              }
+            ],
+          }
+        }
+
+      Posterior a isso inserimos outra dependencia:
+
+        yarn add babel-loader -D
+
+      Por fim trocamos a execução do babel par ao webpack:
+
+        "dev": "webpack --mode=development -w"
+
+    Import/Export:
+
+      Quando temos alguma funcionalidade que está em outro arquivo, mas não queremos reescrever o mesmo codigo,
+      utilizamos o "import/export"
+
+      Basicamente inserimos o "export" na frente da funcionadade que queremos exportar:
+
+        export function soma(a, b) {
+          return a + b;
+        }
+
+        Nesse caso essa função está disponivel para utilização em qualquer outro arquivo que a chame.
+
+      No outro arquivo:
+
+        impor { soma } from './funcoes';
+
+        Esse outro arquivo irá importação soma do arquivo "funcoes".
+
+      Caso exista mais de uma função para ser exportada do mesmo arquivo:
+
+        impor { soma, sub } from './funcoes';
+
+    Export default:
+
+      É uma funcionalidade usada para quando queremos mandar uma função padrão em um arquivo.
+
+      Como existirá varios arquivos e cada um terá um "papel" podemos usar o Export Default.
+
+      export default function soma( a, b ) {
+        return a + b;
+      }
+
+      Nesse caso quando for chamada essa funcionalidade não precisamos chama-la dentro de um objeto:
+
+      import soma from './funcoes';
+
+      Outra coisa interessente é que não precisamos chamar a função extamente com o nome origanal, pode altera-lo
+
+      import sumNumbers from './funcoes'
+
+      Pode não existir uma funcionalidade com esse nome, as export default só haverá uma, que será ela;
+
+      Caso desejamos alterar um nome de uma funcionalidade utilizando o export normal, fazemos:
+
+      import { soma as sumNumbers } from './funcoes';
+
+      Com esse tipo de chamada a função que se chamava "soma" nesse novo arquivo é chamada de sumNumbers
+
+      Em um mesmo arquivo você pode ter um export default e outros exports, quando for feito a chamada:
+
+      import soma, { sub } from './funcoes';
+
+      Nesse será importado em soma o export default e em sub o export normal;
+
+    Import *:
+
+      Com a importação dessa forma podemos agrupar todas as funcionalidades de um arquivo em uma variavel só.
+
+      import * as funcionalidades from './funcoes';
+
+      Nesse caso "funcionalidade" será um objeto com todos os metodos disponiveis dentro dele.
+
+      Dai conseguimos chama-las referenciando o objeto:
+
+        console.log( funcionadades.soma(1, 2) );
+
+        Nesse caso estamos acessando a função soma de funcionalidades;
+
+
