@@ -373,7 +373,7 @@ ES6:
 
         yarn add babel-loader -D
 
-      Por fim trocamos a execução do babel par ao webpack:
+      Por fim trocamos a execução do babel para o webpack:
 
         "dev": "webpack --mode=development -w"
 
