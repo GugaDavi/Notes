@@ -109,9 +109,46 @@ React:
     3 - Chamamos o metodo render;
     4 - Que executa uma função;
     5 - Função essa que contem como retorno o elemento que desejamos;
-    6 - Abrimos um parenteses depois do retorno para a forma de escrita ficar mais legivel, caso não seja colocado
-    6 - IMPORTANTE: O retorno só pode ser feito de uma unica tag;
-      6.1 - Então não podemos fazer uma tag ao lado da outra, para tal
+    6 - Abrimos um parenteses depois do retorno para a forma de escrita ficar mais legivel;
+    7 - IMPORTANTE: O retorno só pode ser feito de uma unica tag;
+      7.1 - Então não podemos fazer uma tag ao lado da outra, para tal;
+      7.2 - Criamos uma unica tag, como uma <div> que conterá todas as outras;
+    8 - Por ultimo podemos inserir o elemento dentro do ReactDOM.render;
+    9 - Por fim podemos utilizar o elemento quantas vezes desejarmos;
+
+Webpack:
+
+  De agora em diente para podermos fazer uma construção dos projetos precisamos do Babel e do Webpack.
+
+  1 - Instalamos o Webpack;
+  2 - Criamos o arquivo: webpack.config.js
+
+  webpack.config.js = Configuração:
+
+  'use strict';
+
+  const path = require('path');
+
+  module.exports = {
+    entry: path.join(__dirname, 'src', 'index'),
+    output: {
+      path: path.join(__dirname, 'dist'),
+      filename: 'bundle.js'
+    }
+  }
+
+  3 - Configuração do webpack.config.js:
+    3.1 - Parametros do entry (Onde e qual arquivo será lido):
+      3.1.1 - __dirname - Diretorio onde está localizado o arquivo;
+      3.1.2 - 'src' - Pasta onde estará o arquivo;
+      3.1.3 - 'index' - Nome do arquiv;
+    3.2 - Propriedades do output (Local e arquivo destino):
+      3.2.1 - __dirname - Diretorio onde está localizado o arquivo;
+      3.2.2 - 'dist' - Local onde será salvo o arquivo;
+      3.2.3 - filename: 'bundle.js' - Nome que o arquivo será salvo;
+  4 - Criamos a pasta e o arquivo src/index.js;
+  5 - Instala o webpack Global;
+  6 - Executamos o webpack no terminal;
 
 
 */
