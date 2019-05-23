@@ -75,7 +75,7 @@ Webpack:
   4 - Desse modo sempre que fizermos alteração em um arquivo o servidor fará a transposição automatica.
   5 - Basta atualizar o browser;
   6 - No final do processo, damos um unico "webpack" e geramos o arquivo final;
-  7 - Ou colocamos o arquivo em
+  7 - Ou colocamos o arquivo diretamente da pasta ./dist/bundle.js;
 
 Modularização:
 
@@ -122,7 +122,7 @@ Configurando Babel:
     "presets": ["es2015", "stage-0"],
   }
 
-  Depois dessas inclusões precisamos acrescentar mais uma dependencia ao bandle para rodar o React com JSX:
+  Depois dessas inclusões precisamos acrescentar mais uma dependencia ao bundle para rodar o React com JSX:
 
     babel-preset-react@6
 
@@ -222,7 +222,7 @@ Configuração do React para o Hot Loader:
       })
     }
 
-  Fazendo uma refaturar o codigo:
+  Refaturando o codigo:
 
     const RenderApp = (NextApp) => {
       ReactDOM.render(
@@ -242,4 +242,7 @@ Configuração do React para o Hot Loader:
         RenderApp(NextApp);
       })
     }
+
+  Nesse processo sempre que fizermos uma atualização nos arquivos, nosso servidor fará a atualização automatica.
+
 */

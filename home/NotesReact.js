@@ -44,13 +44,8 @@ JSX:
   O JSX foi criado pelo Facebook, que é a junção do JS + XML, onde conseguimos fazer criações de elementos de forma
   parecida com a criação no HTML convencional.
 
-  Para tal precisamos inserir um link babel para que ele faça a reenderização do codigo para que o navegador consiga
+  Para tal precisamos inserir o babel para que ele faça a reenderização do codigo para que o navegador consiga
   lê-lo.
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
-
-  Precisamos inserir na na tag script onde será feito os codigos React com JSX o type="text/babel", depois já podemos
-  utiliza-lo normalmente.
 
   <script>
     const h1 = React.createElement( 'h1', null, 'Hello World' );
@@ -75,7 +70,7 @@ JSX:
   elementos para serem utilizados sempre que precisarmos.
 
   const Title = React.createClass({
-    render: () => {
+    render: function () {
       return (
         <div>
           <h1>Titulo</h1>
@@ -121,5 +116,172 @@ Modularização:
   const sum = require('./app');
 
   criamos uma variavel que irá receber o metodo, usando o "requie()" passando o local do arquivo;
+
+JS no JSX:
+
+  Quando precisamos utilizar JS onde está sendo utilizado JSX precisamos inserir {}.
+  Dai o que for escrito dentro delas é JS.
+
+Atibutos das tags:
+
+  Com o JSX, podemos inserir tags nos elementos tranquilamente:
+
+  ReactDOM.render(
+    <h1 name="top">Titulo</h1>,
+    document.querySelector('[data-js="topo"]');
+  )
+
+  Há alguns atributos que são diferentes dos do HTML:
+
+    class === className;
+    for === htmlFor (Dá tag lable);
+
+Props:
+
+  Conseguimos pegar os atributos através do {this.props.name}, mas caso essa classe não exista o campo ficará vazio.
+  Para isso podemos chamar a propriedade:
+
+    getDefaultProps: function () {
+      return {
+        name: 'Fulano';
+      }
+    },
+
+    Nesse caso especifico, se a propriedade "name" não for encontrada, será substituido pela armazenada no metodo.
+
+Funcções Puras e Impuras:
+
+  Uma função torna-se pura e impura dependendo da forma como ela se comporta.
+  Uma função que soma dois números, por exemplo, bascimante ela só precisa de dois parametros que irá funcionar.
+  Essa é uma função pura, pois podemos chama-la diversas vezes com os mesmos parametros que ela irá retornar o mesmo
+  valor, em suma, irá se comportar do mesmo jeito.
+
+  Função impura é aquela que faz edições fora do escopo da função ou tem retornos diferentes para os mesmos parametros.
+  Um exemplo é uma função que quando invocada faz algum tipo de alteração em um obejto externo.
+  Outro, é uma função que passando os mesmos parametros repetidas vezes o resultado é diferente.
+  Imagine uma função que escolhe um número aleatorio entre 1 e 3. Cada vez que você chama função o valor será diferente.
+
+  Basicamente esse conceito é utilizado no React para não fazermos funções que editem outros objetos e ocorra o risco
+  de quebrar nossa aplicação.
+
+  Basicamente podemos fazer a renderização de uma tag somente com funções:
+
+    const Title = () => {
+      return <h1>Gustavo</h1>
+    }
+
+  No momento que essa função for importada o valor que será impresso conforme return da função.
+  Com essa função podemos utilizar as props:
+
+    cosnt Title = ({name, lastName}) => {
+      return <h1>E ai {`${name} ${lastName}`}</h1>
+    }
+
+    Title.defaultProps = {
+      name: 'Ze',
+      lastName: 'Droguinha'
+    }
+
+    Nesse caso:
+
+    1 - Utilizamos o Short Syntax, para pegar somente as keys das propriedades;
+    2 - Abrimos {} para inserir comandos JS;
+    3 - Utilizando o Template Literals chamamos os valores de name e lastName;
+    4 - E por fim inserimos no objeto defaultProps os valores a serem utilizados na falta de alguma das propriedades;
+
+Utilizando Class no React:
+
+  Para utilização das classes do ES6, acrescentamos a classe criada em React.Component:
+
+    class App extends React.Component {
+      render () {
+        return (
+          <div>
+            <Title />
+          </div>
+        )
+      }
+    }
+
+    export default App
+
+    Nesse caso:
+
+      1 - Utilizarmos a notação do ES6 criamos a classe;
+      2 - Extendemos a React.Component
+      3 - E fazemos uma forma parecida como a do React.createClassName;
+      4 - Com o render, mas não no formato de propriedade do objeto render: function () {};
+      5 - E sim como metodo: render () {};
+
+Prop key:
+
+  Essa propriedade serve para diferenciar elementos repetidos, como uma separação: quem é o primeiro, segundo e etc.
+
+  Exemplo:
+
+    const Square = ({ color }) => (
+      <div style={{
+        backgroundColor: color,
+        height: '100px',
+        width: '100px'
+      }}>
+      </div>
+    )
+
+    Square.defaultProps = {
+      color: 'red'
+    }
+
+    ----
+
+    class App extends React.Component {
+      render () {
+        <div>
+          { ['green', 'black', 'yellow' ].map((square) => (
+            <Square color={square}/>
+          )) }
+        </div>
+      }
+    }
+
+    Nesse caso:
+
+      1 - Criamos uma <div> que basicamente será um quadrado com um cor de fundo;
+      2 - Para inserirmos informações no CSS precisamos abrir:
+       2.1 - style={{}};
+       2.2 - A primeira {} é dizendo que iremos inserir codigo JS ali dentro;
+       2.3 - A segunda {} é um objeto que terá as propriedades;
+      3 - Interessante dizer que nessa arrow function não utilizamos o return, pois não abrimos {} e sim ();
+      4 - Por fim colocamos as defaultProps;
+      5 - E no doc de que iremos renderizar criamos um array de cores;
+      6 - Utilizamos o .map para percorrer esse array e a cada retorno...;
+      7 - Renderizar um novo elemento uma das cores do array;
+
+  Dessa forma o React irá fazer o que solicitamos, contudo ele ficará "confuso" sobre a "identidade" de cada elemento
+  Por isso utilizamos a prop key para haver uma diferença:
+
+    <Square key={square} color={square} />
+
+  Dessa forma cada quadrado terá uma cor de fundo e uma chave com o nome dessa cor, diferenciando cada um.
+
+  Outro ponto importantissimo é a repetição de keys, quando isso ocorre o React não renderiza todos os elementos,
+  faz somente a renderização do primeiro pois considera que há uma duplicação do elemento.
+
+  Um exemplo dessa repetição é:
+
+    { ['red', 'blue', 'red'].map((cor) => (
+      <Square key={cor} color={cor}/>
+    )) }
+
+    Dessa forma não será renderizado corretamente, pois temos dois elementos com a mesma key.
+
+    Uma solução para esse caso é:
+
+      { ['red', 'blue', 'red'].map((cor, index) => (
+        <Square key={index} color={cor} />
+      )) }
+
+      Nesse caso a key será o index do elemento, logo cado um possui somente uma posição desconsiderando a possibilidade
+      de erro.
 
 */
