@@ -284,4 +284,91 @@ Prop key:
       Nesse caso a key será o index do elemento, logo cado um possui somente uma posição desconsiderando a possibilidade
       de erro.
 
+Eventos:
+
+  Para inserir eventos nos elementos utilizamos a notação parecida com a aplicação inline, mas não é literalmente.
+
+    <div onClick={(e) => {alert('Clicou')}}></div>
+
+Prop children:
+
+  Essa propriedade é utilizada para quando queremos manipular a informação que está dentro de uma tag.
+  Exemplo:
+
+    const Button = () => (
+      <button>Botão<button>
+    )
+
+    export default Button
+
+    ---
+
+    class App extends React.Component {
+      render () {
+        <div>
+          <Button />
+        </div>
+      }
+    }
+
+    Nesse caso o React fará a renderação somente de um botação estatico. Nessa mesma forma podemos fazer:
+
+      const Button = ({ children }) => (
+        <button>{ children }</button>
+      )
+
+      ---
+
+      import Button from './button'
+
+      class App extends React.Componet {
+        render () {
+          <div>
+            <Button>Texto Qualquer</Button>
+          </div>
+        }
+      }
+
+    Já nesse caso deixamos algo dinamico, onde criamos um botão com caracteristicas "x" e podemos reutiliza-la
+    mudando somente o conteudo que estará dentro da tag;
+
+State:
+
+  Essa propriedade consiste basciamente no estado de uma aplicação. Onde em algum momento especifico podem ser pegas,
+  alteradas ou inseridas.
+  Exemplo:
+
+    class App extends Reacte.Component {
+      constructor() {
+        super()
+
+        this.state = {
+          name: 'Gustavo'
+        }
+      }
+
+      render() {
+        return (
+          <div>
+            <h1>{ this.state.name }</h1>
+            <Button onClick={() => { this.setState({ name: 'Matheus' }) }}>
+          </div>
+        )
+      }
+    }
+
+    Basicamente criamos o estado dentro da propriedade this.state. É necessario inicialização do constructor, pois
+    é a primeira função que executamos no inicio de uma classe.
+    Nesse exemplo especifico: criamos um botação que tem a função de alterar um nome especifico.
+
+Stateful x Stateless
+
+  Basicamente é a diferença entre elementos que recebem estados e que são atribuidos estados.
+  A componitização do React gira em torno de um elemento que terá um caracteristica, independente do estado que terá
+  dentro dele.
+
+  Elementos stateful são aqueles que recebem os estados e os elementos stateless são aqueles elementos que renderizão
+  os estados.
+
+
 */
