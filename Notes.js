@@ -32,6 +32,15 @@ Variaveis: // TODO Variaveis
         *null != undefined = Uma foi declarada - null(sem valor), outra não foi declarada
         - undefined(valor não declarado)
 
+      Metodos de numbers:
+
+        .toFixed(x) = Pegará um número decimal e irá utiliza-lo com 'x' casas decimais;
+        .toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) = Irá retornar o valor no formato monetario:
+          BRL: Real;
+          USD: Dolar;
+          EUR: Euro;
+          GPR: Libra;
+
 Operadores aritimetricos: // TODO Operadores aritimetricos
 
     Classicos:
@@ -1414,4 +1423,3 @@ AJAX: // AJAX
 
 */
 // TODO FIM
-
