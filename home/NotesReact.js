@@ -361,7 +361,7 @@ State:
     é a primeira função que executamos no inicio de uma classe.
     Nesse exemplo especifico: criamos um botação que tem a função de alterar um nome especifico.
 
-Stateful x Stateless
+Stateful x Stateless:
 
   Basicamente é a diferença entre elementos que recebem estados e que são atribuidos estados.
   A componitização do React gira em torno de um elemento que terá um caracteristica, independente do estado que terá
@@ -369,6 +369,24 @@ Stateful x Stateless
 
   Elementos stateful são aqueles que recebem os estados e os elementos stateless são aqueles elementos que renderizão
   os estados.
+
+Lifecycle:
+
+  O Lifecycle de um elemento existem alguns "processos" e dentro deles metodos para cada situação:
+
+    1 - Mounting; // Montagem;
+      1.1 - componentWillMount // Para ações antes da montagem de um componente;
+      1.2 - componentDidMount // Para ações após a montagem;
+    2 - Unmouting; // Desmontagem
+      2.2 - componentWillUnmunt // Para ações quando o elemento for desmontado ou removido;
+    3 - Updating; // Atualização;
+      3.1 - componentWillReceiveProps(nextProps) // Para no momento da atualização sabermos o que será atualizado;
+      3.2 - shouldComponentUpdate(nextProps, nextState) // Utilizado para saber se o componente está alterando propriedades
+        ou estado, pois caso não, a renderização não precisará acontecer novamente. Retorna True ou False.
+      3.3 - componentWillUpdate(nextProps, nextState) // Passando pelo shouldComponentUpadete() sabemos que ele precisará
+        fazer uma atualização e caso desejarmos fazer alguma ação antes da atualização;
+      3.4 - componentDidUpadate(prevProps, prevState) // Usado após a atualização do componente, onde recebemos a propriedade
+        e estado antigo;
 
 
 */
