@@ -388,5 +388,64 @@ Lifecycle:
       3.4 - componentDidUpadate(prevProps, prevState) // Usado após a atualização do componente, onde recebemos a propriedade
         e estado antigo;
 
+propTypes:
+
+  Utilizamos quando queremos dar tratativas especificas a algum componente que criarmos:
+
+    const Button = ({ children, handleClick }) => {
+      <button onClick={handleClick}>{ children }</button>
+    }
+
+  Caso, por exemplo, nós quisermos que o "handleClick" seja obrigatoriamente uma função fazemos:
+
+    Button.propTypes = {
+      handleClick: React.PropTypes.func
+    }
+
+  A partir de agora o "handleClick" só aceitará atribuição de função.
+
+  Outras opções:
+
+    .array; // Para aceitar somente array;
+    .bool; // Valores boolean;
+    .number; // Números;
+    .object; // Objeto;
+    .string; // String;
+    .node // Qualquer tipo de elemento;
+    .element; // Um elemento React;
+    .oneOf(['x', 'y']); // Um dos dois;
+    .oneOfTypes([
+      React.PropTypes.func,
+      React.PropTypes.array,
+      React.PropTypes.string
+    ]) // Algum desses tipos;
+
+Controlled e Uncontrolled Components:
+
+  Basicamente são componetes que tempos controle daquilo que está sendo inserido, alterado ou excluido do elemento.
+
+    <input type="text" value="Texto">
+
+    Esse componente é considerado Uncontrollend, justamente porque não temos controle daquilo que está sendo inserido
+    no elemento.
+
+    <input type="text" value={this.state.value}/>
+
+    Dessa segunda forma o elemento será reenderizado com um estado especifico, tornando-se assim um elemento controlled.
+
+    Outra coisa importante sobre os elementos controlled é o monitoramento constante do elemento.
+
+    <input type="text" value={this.state.value} onChange={(e) => { this.setState({ value: e.target.value }) }}/>
+
+    Agora temos um elemento controlled 100%, ele irá mostrar o estado correto e irá armazenar o valor correto também.
+
+  Importante:
+
+    O metodo this.setState é assicrono.
+    Sendo assim podemos utilizar o segundo parametro desse metodo.
+
+    this.setState({ value: e.target.value }), this.setState({ checked: e.target.checked })
+
+    Nesse caso no momento que uma alteração for feita a outra será feita de imediatamente.
 
 */
