@@ -114,7 +114,7 @@ Anotações pertinentes ao curso de Node.js
 
   Administrando informações do banco de dados:
 
-    Deoius de todas essas instalações fazemos:
+    Depois de todas essas instalações fazemos:
 
       Criamos as "colunas" do nosso banco de dados;
 
@@ -147,8 +147,7 @@ Anotações pertinentes ao curso de Node.js
 
         mongoose.model('Product', ProductSchema)
 
-      Bascimente deteminando as linhas de uma coluna, e suas caracteristicas.
-
+      Bascimente determinando as linhas de uma coluna, e suas caracteristicas.
 
       Depois anexado os arquivos no nosso arquivo do servidor.
 
@@ -177,5 +176,165 @@ Anotações pertinentes ao curso de Node.js
         })
 
       Basicamente quando acessarmos a rota será feito o INSERT
+
+  Agora precisamos fazer algumas alterações quanto a estrutura da nossa aplicação, pois não é uma boa pratica
+  manter todas essas funcionalidade em um unico arquivo.
+
+  O primeiro passo é separar as rotas:
+
+    Dentro de src/routes.js
+
+  Dentro do arquivo:
+
+    const express = require('express')
+    const routes = express.Router()
+
+  Depois colocamos as rotas que iremos utilizar, que nesse caso será:
+
+    routes.get('/', (req, res) => {
+    })
+
+    module.exports = routes // Exportando as rotas
+
+  E no nosso servidor chamaos nossas rotas:
+
+    app.use('/', require('./src/routes.js'))
+
+    Onde basicamento:
+
+    1 - Utilizamos o .use() pois ele aceita qualquer tipo de solicitação HTTP
+    2 - O primeiro parametro será a continuidade da URN;
+    3 - Chamamos o arquivo com as rotas;
+
+  Agora criamos nossos controllers, que irão determinar para os models como serão feita as solicitações;
+
+  Como estamos falando de controllers, criamos uma pasta dentro de src: src/controllers/ProductController.js
+
+  Com o arquivo criado:
+
+    const mongoose = require('mongoose')
+
+    const Product = mongoose.model('Product')
+
+    module.exports = {
+      async index(req, res) {
+        const products = await Products.find()
+
+        return res.json(products)
+      }
+    }
+
+    Onde basicamente:
+
+    1 - Chamamos o mongoose para trabalhar com o banco e Product, que é nosso model;
+    2 - Exportamos uma função chamada index
+    3 - Essa função fará uma busca com base na estrutura de Products;
+
+  Depois podemos alterar nosso arquivo de rotas:
+
+  routes.js:
+
+    const ProductController = require('./controller/ProductController')
+
+    routes.get('/products', ProductController.index)
+
+    Dessa forma:
+      1 - Chamamos o arquivo que terá a consulta ao banco;
+      2 - E utilizamos na nossa rota;
+
+  Para saber se nossas rotas estão funcionando normalmente instalamos um programa que gerencia todas elas:
+
+    insomnia
+
+    Com ele poderemos tratar nossas rotas de diversas formas.
+
+  Agora podemos criar um novo metodo em nosso ProductController, como por exemplo: criar um novo objeto no banco.
+
+    No arquiv ProductController.js:
+
+      async create(req, res) {
+        const product = await Product.create(req.body)
+
+        return res.json(product)
+      }
+
+    Depois inserimos uma nova rota:
+
+      routes.post('/products', ProductController.create)
+
+  E pronto, já podemos inserir informações no nosso banco.
+
+  Algo importante a salientar é que o precisamos alterar uma configuração no nosso app:
+
+  Em server.js:
+
+    app.use(express.json())
+
+    Basicamente estamos autorizando que objetos no formato json sejam inseridos no nosso banco.
+
+  Criado novos metodos:
+
+    Agora podemos criar novas funcionalidades, como: consulta especifica, atualização e delete.
+
+      Em ProductController.js:
+
+      Consulta especifica:
+
+        async show(req, res) {
+          const product = await Product.findById(req.params.id)
+
+          return res.json(product)
+        }
+
+        Inserimos na nossas rotas:
+
+        routes.get('/products/:id', ProductController.show)
+
+        Basicamente:
+
+          1 - Criamos um metodo para consulta no banco através do ID;
+          2 - Para isso utilizamos o metodo de Product.findById;
+          3 - Onde passamos: req.params.id
+            3.1 - Ele irá pegar o ID que foi passado na URL e procura-lo no banco;
+
+          4 - No arquivo de rotas, declaramos que com o id na URI irá consultar aquele ID.
+
+      Atualização:
+
+        async update(req, res) {
+          const product = await Product findByIndAndUpdate(red.params.id, req.body, {
+            new: true
+          })
+
+          return res.json(product)
+        }
+
+        Inserimos nas rotas:
+
+        routes.put('/products/:id', ProductController.update)
+
+        Basicamente:
+
+          1 - Informamos qual o Id que queremos atualizar;
+          2 - Dizemos qual será a atualização;
+          3 - O terceiro parametro é que o rotorno dessa execução deve ser o objeto atualizado;
+            3.1 - Sem ele o retorno será do objeto antes da atualização;
+
+      Delete:
+
+        async destroy(req, res) {
+          await Product.findByIdAndDelete(red.params.id)
+
+          return res.send()
+        }
+
+        Inserimos nas rotas:
+
+        routes.delete('/products/:id', ProductController.destroy)
+
+        Basicamente:
+
+          1 - Não inserimos o metodo em uma variavel pois não precisamos retorna-la;
+          2 - Retornamos a resposta do servidor despois da ação;
 
 */
